@@ -17,7 +17,7 @@
             <strong>{{ email.subject }}</strong> - {{ email.body }}
           </p>
         </td>
-        <td class="date">{{ email.sentAt }}</td>
+        <td class="date">{{ format(new Date(email.sentAt), "MMM do yyyy") }}</td>
       </tr>
     </tbody>
   </table>
@@ -69,6 +69,13 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    sortedEmails() {
+      return this.emails.sort((e1, e2) => {
+        return e1.sentAt < e2.sentAt ? 1 : -1;
+      });
+    }
   }
 };
 </script>
