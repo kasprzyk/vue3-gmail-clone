@@ -2,7 +2,7 @@
   <h1>VMail Inbox</h1>
   <table class="mail-table">
     <tbody>
-      <tr v-for="email in emails" :key="email.id" class="clickable">
+      <tr v-for="email in emails" :key="email.id" :class="['clickable', email.read ? 'read' : '']">
         <td>
           <input type="checkbox" />
         </td>
@@ -40,7 +40,7 @@ export default {
           body: "test",
           sentAt: "2020-03-27T18:25:43.511Z",
           archived: false,
-          read: true
+          read: false
         },
         {
           id: 3,
@@ -49,7 +49,7 @@ export default {
           body: "test",
           sentAt: "2020-03-27T18:25:43.511Z",
           archived: false,
-          read: true
+          read: false
         },
         {
           id: 4,
@@ -58,7 +58,7 @@ export default {
           body: "test test test test test",
           sentAt: "2020-03-27T18:25:43.511Z",
           archived: false,
-          read: true
+          read: false
         }
       ]
     };
