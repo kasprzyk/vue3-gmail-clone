@@ -2,7 +2,12 @@
   <h1>VMail Inbox</h1>
   <table class="mail-table">
     <tbody>
-      <tr v-for="email in emails" :key="email.id" :class="['clickable', email.read ? 'read' : '']">
+      <tr
+        v-for="email in emails"
+        :key="email.id"
+        :class="['clickable', email.read ? 'read' : '']"
+        @click="email.read = true"
+      >
         <td>
           <input type="checkbox" />
         </td>
@@ -19,10 +24,12 @@
 </template>
 
 <script>
+import { format } from "date-fns";
 export default {
   name: "App",
   data() {
     return {
+      format,
       emails: [
         {
           id: 1,
