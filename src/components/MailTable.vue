@@ -28,10 +28,46 @@ import { format } from "date-fns";
 
 export default {
   async setup() {
+    await new Promise(resolve => setTimeout(resolve, 3000));
     return {
       format,
-      data: [
-        /* ... */
+      emails: [
+        {
+          id: 1,
+          from: "piotkas1@gmail.com",
+          subject: "test",
+          body: "test",
+          sentAt: "2020-03-27T18:25:43.511Z",
+          archived: false,
+          read: true
+        },
+        {
+          id: 2,
+          from: "piotkas1@gmail.com",
+          subject: "test",
+          body: "test",
+          sentAt: "2020-03-27T18:25:43.511Z",
+          archived: false,
+          read: false
+        },
+        {
+          id: 3,
+          from: "piotkas1@gmail.com",
+          subject: "test",
+          body: "test",
+          sentAt: "2020-03-27T18:25:43.511Z",
+          archived: false,
+          read: false
+        },
+        {
+          id: 4,
+          from: "piotkas1@gmail.com",
+          subject: "test",
+          body: "test test test test test",
+          sentAt: "2020-03-27T18:25:43.511Z",
+          archived: true,
+          read: false
+        }
       ]
     };
   },

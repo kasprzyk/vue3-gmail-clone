@@ -1,13 +1,13 @@
 <template>
   <h1>VMail Inbox</h1>
-  <suspense>
+  <Suspense>
     <template #default>
       <MailTable></MailTable>
     </template>
     <template #fallback>
       <h1>Mails are loading, please wait</h1>
     </template>
-  </suspense>
+  </Suspense>
 </template>
 
 <script>
