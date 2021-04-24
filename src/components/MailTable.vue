@@ -5,7 +5,7 @@
         v-for="email in unarchivedEmails"
         :key="email.id"
         :class="['clickable', email.read ? 'read' : '']"
-        @click="email.read = true"
+        @click="readEmail(email)"
       >
         <td>
           <input type="checkbox" />
@@ -17,7 +17,7 @@
           </p>
         </td>
         <td class="date">{{ format(new Date(email.sentAt), "MMM do yyyy") }}</td>
-        <td><button @click="email.archived = true">Archive</button></td>
+        <td><button @click="archiveEmail(email)">Archive</button></td>
       </tr>
     </tbody>
   </table>
@@ -25,50 +25,14 @@
 
 <script>
 import { format } from "date-fns";
+import axios from "axios";
 
 export default {
   async setup() {
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    let { data: emails } = await axios.get("http://localhost:3000/emails");
     return {
       format,
-      emails: [
-        {
-          id: 1,
-          from: "piotkas1@gmail.com",
-          subject: "test",
-          body: "test",
-          sentAt: "2020-03-27T18:25:43.511Z",
-          archived: false,
-          read: true
-        },
-        {
-          id: 2,
-          from: "piotkas1@gmail.com",
-          subject: "test",
-          body: "test",
-          sentAt: "2020-03-27T18:25:43.511Z",
-          archived: false,
-          read: false
-        },
-        {
-          id: 3,
-          from: "piotkas1@gmail.com",
-          subject: "test",
-          body: "test",
-          sentAt: "2020-03-27T18:25:43.511Z",
-          archived: false,
-          read: false
-        },
-        {
-          id: 4,
-          from: "piotkas1@gmail.com",
-          subject: "test",
-          body: "test test test test test",
-          sentAt: "2020-03-27T18:25:43.511Z",
-          archived: true,
-          read: false
-        }
-      ]
+      emails
     };
   },
   computed: {
@@ -79,6 +43,19 @@ export default {
     },
     unarchivedEmails() {
       return this.sortedEmails.filter(e => !e.archived);
+    }
+  },
+  methods: {
+    readEmail(email) {
+      email.read = true;
+      this.updateEmail(email);
+    },
+    archiveEmail(email) {
+      email.archived = true;
+      this.updateEmail(email);
+    },
+    updateEmail(email) {
+      axios.put(`http://localhost:3000/emails/${email.id}`, email);
     }
   }
 };
