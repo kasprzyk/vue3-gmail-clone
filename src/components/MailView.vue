@@ -26,6 +26,14 @@ import useKeydown from "../composables/use-keydown";
 export default {
   setup(props, { emit }) {
     let email = props.email;
+    // let toggleRead = () => {
+    //   email.read = !email.read
+    //   axios.put(`http://localhost:3000/emails/${email.id}`, email)
+    // }
+    // let toggleArchive = () => {
+    //   email.archived = !email.archived
+    //   axios.put(`http://localhost:3000/emails/${email.id}`, email)
+    // }
     let toggleRead = () => {
       emit("changeEmail", { toggleRead: true, save: true });
     };
